@@ -1,0 +1,59 @@
+name: fitness_app
+description: A new Flutter project.
+
+publish_to: 'none'
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.1 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
+  flutter_svg: ^1.1.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+ 
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/image/
+    - assets/icon/
+
+  fonts:
+    - family: SF Pro
+      fonts:
+        - asset: assets/font/SF-Pro-Display-Black.ttf
+        - asset: assets/font/SF-Pro-Display-Bold.ttf
+        - asset: assets/font/SF-Pro-Display-Light.ttf
+        - asset: assets/font/SF-Pro-Display-Medium.ttf
+        - asset: assets/font/SF-Pro-Display-Regular.ttf
+        - asset: assets/font/SF-Pro-Display-Semibold.ttf
+        - asset: assets/font/SF-Pro-Display-Thin.ttf
+        - asset: assets/font/SF-Pro-Display-Ultralight.ttf
+    - family: Cairo
+      fonts:
+        - asset: assets/font/Cairo-Black.ttf
+        - asset: assets/font/Cairo-Bold.ttf
+        - asset: assets/font/Cairo-Light.ttf
+        - asset: assets/font/Cairo-Medium.ttf
+        - asset: assets/font/Cairo-Regular.ttf
+        - asset: assets/font/Cairo-SemiBold.ttf
+        - asset: assets/font/Cairo-ExtraBold.ttf
+        - asset: assets/font/Cairo-ExtraLight.ttf
