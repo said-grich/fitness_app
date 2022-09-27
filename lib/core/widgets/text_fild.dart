@@ -9,8 +9,10 @@ Widget textFild({
   required String hintTxt,
   required String image,
   required TextEditingController controller,
+  
   bool isObs = false,
   TextInputType? keyBordType,
+  required Function(String value) onChange
 }) {
   return  Directionality(
                 textDirection: TextDirection.rtl,
@@ -33,6 +35,7 @@ Widget textFild({
           Container(
             width: 270.0,
             child: TextField(
+              onChanged: onChange,
               textAlignVertical: TextAlignVertical.center,
               textDirection: TextDirection.rtl,
               obscureText: isObs,
