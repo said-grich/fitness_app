@@ -51,7 +51,7 @@ Widget textFild({
           SvgPicture.asset(
             'assets/icon/$image',
             height: 20.0,
-            color: grayText,
+            color: Colors.black,
           )
         ],
       ),

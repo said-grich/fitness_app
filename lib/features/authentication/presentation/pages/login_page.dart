@@ -31,7 +31,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: blackBG,
+      
+      backgroundColor: grayback,
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0),
         child: SingleChildScrollView(
@@ -89,9 +90,9 @@ class LoginForm extends StatelessWidget {
       child: Column(
         children: [
           const SpaceVH(height: 50.0),
-          const Text(
+           Text(
             AppString.welcomeBackString,
-            style: headline1,
+            style: headline1.copyWith(color: Colors.black),
           ),
           const SpaceVH(height: 10.0),
           const Text(
@@ -169,7 +170,7 @@ class LoginForm extends StatelessWidget {
                   onTap: () {},
                   text: AppString.loginWithGoogleString,
                   image: 'google.png',
-                  btnColor: white,
+                  btnColor: bluelight,
                   txtColor: blackBG,
                 ),
                 const SpaceVH(height: 20.0),
@@ -186,6 +187,7 @@ class LoginForm extends StatelessWidget {
                         text: AppString.dontHaveAnAccount,
                         style: headline.copyWith(
                           fontSize: 14.0,
+                          color: Colors.black
                         ),
                       ),
                       TextSpan(

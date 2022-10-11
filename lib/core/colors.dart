@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 const Color blueButton = Color(0xFF5468FF);
+const Color bluelight = Color(0xFFC1EFFF);
 
 const Color blueText = Color(0xFF4D60E7);
 const Color grayback = Color(0xFFF8F8F8);
@@ -13,7 +14,7 @@ const Color white = Color(0xFFFFFFFF);
 const Color black = Color(0xFF000000);
 
 const Color blackBG = Color(0xFF181A20);
-const Color blackTextFild = Color(0xFF262A34);
+const Color blackTextFild = Color.fromARGB(255, 255, 255, 255);
 
 const List<Color> gradient = [
   Color.fromRGBO(24, 26, 32, 1),

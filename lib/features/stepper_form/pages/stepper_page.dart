@@ -6,7 +6,6 @@ import 'package:fitness_app/core/bloc_export.dart';
 import 'package:fitness_app/core/space.dart';
 import 'package:fitness_app/core/test_style.dart';
 import 'package:fitness_app/features/authentication/bloc/authentication_bloc.dart';
-import 'package:fitness_app/features/authentication/presentation/pages/login_page.dart';
 import 'package:fitness_app/features/authentication/repository/authentication_repository.dart';
 import 'package:fitness_app/features/home_page/presentation/pages/home_page.dart';
 import 'package:fitness_app/features/stepper_form/cubit/stepper_cubit.dart';
@@ -43,7 +42,7 @@ class _StepperDemoState extends State<StepperPage> {
         create: (context) =>
             StepperCubit(context.read<AuthenticationRepository>()),
         child: Scaffold(
-          backgroundColor: blackBG,
+          backgroundColor: grayback,
           body: BlocConsumer<StepperCubit, StepperState>(
             listener: (context, state) {},
             builder: (context, state) {
@@ -152,7 +151,7 @@ class _StepperDemoState extends State<StepperPage> {
                                 title: Text(AppString.bodyInfString,
                                     style: state.currentStep >= 1
                                         ? const TextStyle()
-                                        : headline3.copyWith()),
+                                        : headline3.copyWith(color: Colors.black)),
                                 content: Column(
                                   children: <Widget>[
                                     const SpaceVH(height: 10.0),
@@ -209,7 +208,7 @@ class _StepperDemoState extends State<StepperPage> {
                                 title: Text(AppString.moreInfoString,
                                     style: state.currentStep == 2
                                         ? const TextStyle()
-                                        : headline3.copyWith()),
+                                        : headline3.copyWith(color: Colors.black)),
                                 content: Column(
                                   children: <Widget>[
                                     textFieldWith(
@@ -371,7 +370,7 @@ class _StepperDemoState extends State<StepperPage> {
       children: <Widget>[
         Theme(
           data:
-              Stlyes.themeData().copyWith(unselectedWidgetColor: blackTextFild),
+              Stlyes.themeData().copyWith(unselectedWidgetColor: blueButton),
           child: Radio(
             activeColor: Theme.of(context).primaryColor,
             value: gender[btnValue],
@@ -401,7 +400,7 @@ class _StepperDemoState extends State<StepperPage> {
       children: <Widget>[
         Theme(
           data:
-              Stlyes.themeData().copyWith(unselectedWidgetColor: blackTextFild),
+              Stlyes.themeData().copyWith(unselectedWidgetColor: blueButton),
           child: Radio(
             activeColor: Theme.of(context).primaryColor,
             value: types[btnValue],

@@ -23,7 +23,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: blackBG,
+      backgroundColor: grayback,
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0),
         child: SingleChildScrollView(
@@ -77,9 +77,9 @@ class SingupForm extends StatelessWidget {
     return Column(
       children: [
         const SpaceVH(height: 50.0),
-        const Text(
+         Text(
           AppString.singUpString,
-          style: headline1,
+          style: headline1.copyWith(color: Colors.black),
         ),
         const SpaceVH(height: 10.0),
         const Text(
@@ -149,7 +149,7 @@ class SingupForm extends StatelessWidget {
           onTap: () {},
           text: 'Sign in with google',
           image: 'google.png',
-          btnColor: white,
+          btnColor: bluelight,
           txtColor: blackBG,
         ),
         const SpaceVH(height: 20.0),
@@ -162,6 +162,7 @@ class SingupForm extends StatelessWidget {
               TextSpan(
                 text: AppString.haveAnAccountString,
                 style: headline.copyWith(
+                  color: Colors.black,
                   fontSize: 14.0,
                 ),
               ),

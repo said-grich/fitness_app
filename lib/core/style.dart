@@ -7,10 +7,10 @@ class Stlyes {
 
   static ThemeData stripeThemeData() {
     return ThemeData(
-      cardColor:blackBG ,
+      cardColor:grayback ,
       textTheme: TextTheme(
 
-        bodyText1: headline1.copyWith(fontSize: 18),
+        bodyText1: headline1.copyWith(fontSize: 18 ),
         bodyText2: headline1
 
 

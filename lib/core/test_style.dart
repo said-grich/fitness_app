@@ -14,13 +14,13 @@ const TextStyle headlineDot = TextStyle(
 );
 const TextStyle headline1 = TextStyle(
   fontSize: 24,
-  color: whiteText,
+  color: Colors.black,
   fontWeight: FontWeight.bold,
 );
 
 const TextStyle headline2 = TextStyle(
   fontSize: 14,
-  color: whiteText,
+  color: Colors.black,
   fontWeight: FontWeight.w600,
 );
 const TextStyle headline3 = TextStyle(
@@ -30,6 +30,6 @@ const TextStyle headline3 = TextStyle(
 );
 const TextStyle hintStyle = TextStyle(
   fontSize: 14,
-  color: grayText,
+  color: Colors.black,
   fontWeight: FontWeight.bold,
 );
