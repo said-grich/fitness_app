@@ -17,29 +17,19 @@ class AuthenticationRepository {
 
   Future<void> singupWithEmailAndPassword(
       {required String email, required String password}) async {
-    try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+     
+          await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-      }
-    } catch (e) {
-      print(e);
-    }
+     
+      
   }
 
   Future<void> loginWithEmailAndPassword(
       {required String email, required String password}) async {
-    try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
-    } catch (_) {}
   }
 
   Future<void> logout() async {
@@ -54,4 +44,7 @@ extension on User {
     return UserModel(
         id: uid, email: email, fullName: displayName, photo: photoURL);
   }
+
+
+
 }

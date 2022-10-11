@@ -8,6 +8,9 @@ abstract class AuthenticationEvent extends Equatable {
 }
 
 class AppUserLogoutRequested extends AuthenticationEvent {}
+class AppUserSingUp extends AuthenticationEvent {}
+class AppUserInfoComplete extends AuthenticationEvent {}
+class AppUserLogoutWithoutCompletInfo extends AuthenticationEvent {}
 
 class AppUserChanged extends AuthenticationEvent {
   final UserModel user;

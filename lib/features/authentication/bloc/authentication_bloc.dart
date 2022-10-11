@@ -1,7 +1,8 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:equatable/equatable.dart';
+import 'package:fitness_app/core/bloc_export.dart';
 import 'package:fitness_app/features/authentication/models/user_model.dart';
 import 'package:fitness_app/features/authentication/repository/authentication_repository.dart';
 
@@ -22,13 +23,28 @@ class AuthenticationBloc
             : const AuthenticationState.unauthenticated()) {
     on<AppUserChanged>(_onUserChange);
     on<AppUserLogoutRequested>(_onLogOutRequested);
-    _userSubscription = authenticationRepository.user.listen((user) {
-      add(AppUserChanged(user));
+    on<AppUserSingUp>(_onSingUP);
+    on<AppUserInfoComplete>(_onInfoComplete);
+    on<AppUserLogoutWithoutCompletInfo>(_onunathntecated);
+    _userSubscription = authenticationRepository.user.listen((user) async {
+      FirebaseFirestore fireStore = FirebaseFirestore.instance;
+      if (user.isNotEmpty && user.id != null) {
+
+        var userDocRef = fireStore.collection('users').doc(user.id);
+        var doc = await userDocRef.get();
+        if (doc.exists) {
+          add(AppUserChanged(user));
+        } else {
+          add(AppUserSingUp());
+        }
+      } else {
+        add(AppUserLogoutWithoutCompletInfo());
+      }
     });
   }
 
   void _onUserChange(AppUserChanged event, Emitter<AuthenticationState> emit) {
-  emit(  event.user.isNotEmpty
+    return emit(event.user.isNotEmpty
         ? AuthenticationState.authenticated(event.user)
         : const AuthenticationState.unauthenticated());
   }
@@ -38,8 +54,22 @@ class AuthenticationBloc
     unawaited(_repository.logout());
   }
 
+
+  void _onSingUP(AppUserSingUp event, Emitter<AuthenticationState> emit) {
+    emit(const AuthenticationState.imcomplete());
+  }
+
+  void _onInfoComplete(
+      AppUserInfoComplete event, Emitter<AuthenticationState> emit) {
+    emit(const AuthenticationState.complete());
+  }  void _onunathntecated(
+      AppUserLogoutWithoutCompletInfo event, Emitter<AuthenticationState> emit) {
+    emit(const AuthenticationState.unauthenticated());
+  }
+
   @override
   Future<void> close() {
+    add(AppUserLogoutWithoutCompletInfo());
     _userSubscription.cancel();
     return super.close();
   }

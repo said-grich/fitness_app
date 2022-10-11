@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
 const Color blueButton = Color(0xFF5468FF);
+
 const Color blueText = Color(0xFF4D60E7);
+const Color grayback = Color(0xFFF8F8F8);
 
 const Color grayText = Color(0xFF5D5F65);
 const Color whiteText = Color(0xFFEDEEEF);
+const Color redText = Color(0xFFF96666);
 
 const Color white = Color(0xFFFFFFFF);
 const Color black = Color(0xFF000000);

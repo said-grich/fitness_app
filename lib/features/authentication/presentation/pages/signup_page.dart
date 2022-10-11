@@ -5,16 +5,20 @@ import 'package:fitness_app/core/space.dart';
 import 'package:fitness_app/core/test_style.dart';
 import 'package:fitness_app/core/widgets/main_button.dart';
 import 'package:fitness_app/core/widgets/text_fild.dart';
+import 'package:fitness_app/features/authentication/bloc/authentication_bloc.dart';
 import 'package:fitness_app/features/authentication/cubits/singup_cubits/singup_cubit_cubit.dart';
+import 'package:fitness_app/features/authentication/presentation/pages/login_page.dart';
 import 'package:fitness_app/features/authentication/repository/authentication_repository.dart';
 import 'package:fitness_app/features/home_page/presentation/pages/home_page.dart';
+import 'package:fitness_app/features/stepper_form/pages/stepper_page.dart';
+import 'package:fitness_app/features/stepper_form/widgets/error_widget.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class SignUpPage extends StatelessWidget {
-  SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({Key? key}) : super(key: key);
 
-  static Page page() => MaterialPage<void>(child: SignUpPage());
+  static Page page() => const MaterialPage<void>(child: SignUpPage());
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +27,34 @@ class SignUpPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0),
         child: SingleChildScrollView(
-          child: BlocProvider(
-            create: (context) =>
-                SingupCubit(context.read<AuthenticationRepository>()),
-            child: SingupForm(),
+          child: BlocListener<AuthenticationBloc, AuthenticationState>(
+            listener: (context, state) {
+              print(state);
+        if (state.status == AppStatus.authenticated) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const HomePage()),
+            (Route<dynamic> route) => false,
+          );
+        } else if (state.status == AppStatus.incomplete) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const StepperPage()),
+            (Route<dynamic> route) => false,
+          );
+        } else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginPage()),
+            (Route<dynamic> route) => false,
+          );
+        }
+            },
+            child: BlocProvider(
+              create: (context) =>
+                  SingupCubit(context.read<AuthenticationRepository>()),
+              child: SingupForm(),
+            ),
           ),
         ),
       ),
@@ -59,13 +87,6 @@ class SingupForm extends StatelessWidget {
           style: headline3,
         ),
         const SpaceVH(height: 60.0),
-        textFild(
-          controller: userName,
-          image: 'user.svg',
-          keyBordType: TextInputType.name,
-          hintTxt: AppString.fullNameString,
-          onChange: (String value) {},
-        ),
         BlocBuilder<SingupCubit, SingupState>(
           buildWhen: ((previous, current) => previous.email != current.email),
           builder: (context, state) {
@@ -80,13 +101,12 @@ class SingupForm extends StatelessWidget {
             );
           },
         ),
-        textFild(
-          controller: userPh,
-          image: 'phone.svg',
-          keyBordType: TextInputType.phone,
-          hintTxt: AppString.phoneNumberString,
-          onChange: (String value) {},
-        ),
+        BlocBuilder<SingupCubit, SingupState>(builder: ((context, state) {
+          return state.status == SingupStatus.error &&
+                  state.emailMsgError.isNotEmpty
+              ? ErrorMessage(msg: state.emailMsgError)
+              : const SpaceVH(height: 0.0);
+        })),
         BlocBuilder<SingupCubit, SingupState>(
           builder: (context, state) {
             return textFild(
@@ -100,17 +120,28 @@ class SingupForm extends StatelessWidget {
             );
           },
         ),
+        BlocBuilder<SingupCubit, SingupState>(builder: ((context, state) {
+          return state.status == SingupStatus.error &&
+                  state.passwordMsgError.isNotEmpty
+              ? ErrorMessage(msg: state.passwordMsgError)
+              : const SpaceVH(height: 0.0);
+        })),
         const SpaceVH(height: 20.0),
         BlocBuilder<SingupCubit, SingupState>(
           builder: (context, state) {
-            return Mainbutton(
-              onTap: () {
-                context.read<SingupCubit>().singupWithEmailAndPassword();
-                 
-              },
-              text: AppString.singUpString,
-              btnColor: blueButton,
-            );
+            return state.status == SingupStatus.submitting
+                ? const CircularProgressIndicator()
+                : Mainbutton(
+                    onTap: () async {
+                      await context
+                          .read<SingupCubit>()
+                          .singupWithEmailAndPassword();
+                      // ignore: use_build_context_synchronously
+                      context.read<AuthenticationBloc>().add(AppUserSingUp());
+                    },
+                    text: AppString.singUpString,
+                    btnColor: blueButton,
+                  );
           },
         ),
         const SpaceVH(height: 20.0),
