@@ -304,7 +304,7 @@ class _StepperDemoState extends State<StepperPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (builder) =>
-                                            const HomePage()));
+                                            const HomePage(pgaenumber: 0,)));
 
                                 context.read<AuthenticationBloc>().add(AppUserInfoComplete());
                               },

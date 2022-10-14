@@ -14,9 +14,9 @@ class PlansPage extends StatelessWidget {
   Widget build(BuildContext context) {
       var items = [
     PlaceInfo('خططي الغدائية', const Color(0xff6DC8F3), const Color(0xff73A1F9),
-        4.4, 'Dubai · In The Dubai Mall', 'Cosy · Casual · Good for kids','diet.png'),
+        4.4, '', '','diet.png'),
     PlaceInfo('خططي الرياضية', const Color(0xffFFB157), const Color(0xffFFA057), 3.7,
-        'Sharjah', 'All you can eat · Casual · Groups','fitness.png'),
+        '', '','fitness.png'),
   ];
 
     return Scaffold(
@@ -32,11 +32,7 @@ class PlansPage extends StatelessWidget {
 
         ),body: CardList(items: items, borderRadius: 24,)
         
-        
-        
-        
-        ,
-
+      ,
 
     );
   }

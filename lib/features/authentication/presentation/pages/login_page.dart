@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
         if (state.status == AppStatus.authenticated) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage(pgaenumber: 0,)),
             (Route<dynamic> route) => false,
           );
         } else if (state.status == AppStatus.incomplete) {

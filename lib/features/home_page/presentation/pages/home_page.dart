@@ -15,19 +15,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class HomePage extends StatelessWidget {
+  final int pgaenumber;
+  static const List<Widget> pages = <Widget>[
+    DashboardPage(),
+    PlansPage(),
+    DiscussionPage(),
+    ProfilePage(),
+    // Camera page
+    // Chats page
+  ];
 
-
-static const List<Widget> pages = <Widget>[
-  DashboardPage(),
-  PlansPage(),
-  DiscussionPage(),
-  ProfilePage(),
-  // Camera page
-  // Chats page
-];
-
-  const HomePage({super.key});
-  static Page page() => const MaterialPage<void>(child: HomePage());
+  const HomePage({super.key, required this.pgaenumber});
+  static Page page() => const MaterialPage<void>(child: HomePage(pgaenumber: 0,));
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,7 @@ static const List<Widget> pages = <Widget>[
         if (state.status == AppStatus.authenticated) {
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const HomePage()),
+            MaterialPageRoute(builder: (context) => const HomePage( pgaenumber: 0,)),
             (Route<dynamic> route) => false,
           );
         } else if (state.status == AppStatus.incomplete) {
@@ -57,83 +56,82 @@ static const List<Widget> pages = <Widget>[
         int selectedIndex = 0;
 
         return BlocProvider(
-          create: (context) => HomeCubit(),
+          create: (context) => HomeCubit()..setindex(pgaenumber),
           child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               return Scaffold(
-                backgroundColor: grayback,
-                bottomNavigationBar: NavigationBarTheme(
-                    data: NavigationBarThemeData(
-                      indicatorColor: blueButton,
-                      labelTextStyle: MaterialStateProperty.all(
-                        const TextStyle(fontSize: 14.0),
-                      ),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(35),
-                          topRight: Radius.circular(35),
+                  backgroundColor: grayback,
+                  bottomNavigationBar: NavigationBarTheme(
+                      data: NavigationBarThemeData(
+                        indicatorColor: blueButton,
+                        labelTextStyle: MaterialStateProperty.all(
+                          const TextStyle(fontSize: 14.0),
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            spreadRadius: 1,
-                            blurRadius: 1,
-                            offset: const Offset(
-                                0, 3), // changes position of shadow
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(35),
+                            topRight: Radius.circular(35),
                           ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(35),
-                          topLeft: Radius.circular(35),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 1,
+                              offset: const Offset(
+                                  0, 3), // changes position of shadow
+                            ),
+                          ],
                         ),
-                        child: NavigationBar(
-                            elevation: 100,
-                            labelBehavior:
-                                NavigationDestinationLabelBehavior.alwaysHide,
-                            height: 70,
-                            backgroundColor: Colors.white,
-                            selectedIndex: state.selectedIndex,
-                            onDestinationSelected: (index) {
-                              context
-                                  .read<HomeCubit>()
-                                  .onDestinationSelected(index);
-                            },
-                            destinations: const [
-                              NavigationDestination(
-                                icon: Icon(Icons.home_outlined),
-                                label: 'Home',
-                                selectedIcon: Icon(
-                                  Icons.home_filled,
-                                ),
-                              ),
-                              NavigationDestination(
-                                icon: Icon(Icons.date_range_outlined),
-                                label: AppString.plansString,
-                                selectedIcon: Icon(Icons.date_range_sharp),
-                              ),
-                              NavigationDestination(
-                                icon: Icon(Icons.email_outlined),
-                                label: 'Favorites',
-                                selectedIcon: Icon(
-                                  Icons.email,
-                                ),
-                              ),
-                              NavigationDestination(
-                                  icon: Icon(
-                                    Icons.person_outline,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(35),
+                            topLeft: Radius.circular(35),
+                          ),
+                          child: NavigationBar(
+                              elevation: 100,
+                              labelBehavior:
+                                  NavigationDestinationLabelBehavior.alwaysHide,
+                              height: 70,
+                              backgroundColor: Colors.white,
+                              selectedIndex: state.selectedIndex,
+                              onDestinationSelected: (index) {
+                                context
+                                    .read<HomeCubit>()
+                                    .onDestinationSelected(index);
+                              },
+                              destinations: const [
+                                NavigationDestination(
+                                  icon: Icon(Icons.home_outlined),
+                                  label: 'Home',
+                                  selectedIcon: Icon(
+                                    Icons.home_filled,
                                   ),
-                                  selectedIcon: Icon(Icons.person),
-                                  label: AppString.profileString),
-                            ]),
-                      ),
-                    )),
-                body: pages.elementAt(state.selectedIndex)
-              );
+                                ),
+                                NavigationDestination(
+                                  icon: Icon(Icons.date_range_outlined),
+                                  label: AppString.plansString,
+                                  selectedIcon: Icon(Icons.date_range_sharp),
+                                ),
+                                NavigationDestination(
+                                  icon: Icon(Icons.email_outlined),
+                                  label: 'Favorites',
+                                  selectedIcon: Icon(
+                                    Icons.email,
+                                  ),
+                                ),
+                                NavigationDestination(
+                                    icon: Icon(
+                                      Icons.person_outline,
+                                    ),
+                                    selectedIcon: Icon(Icons.person),
+                                    label: AppString.profileString),
+                              ]),
+                        ),
+                      )),
+                  body: pages.elementAt(state.selectedIndex));
             },
           ),
         );

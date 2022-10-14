@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 
 
-Widget textFild({
+Widget textFormFild({
   required String hintTxt,
   required String image,
   required TextEditingController controller,
@@ -34,8 +34,9 @@ Widget textFild({
           // ignore: sized_box_for_whitespace
           Container(
             width: 240.0,
-            child: TextField(
-              
+            child: TextFormField(
+              minLines: 5,
+              maxLines: 6,
               onChanged: onChange,
               textAlignVertical: TextAlignVertical.center,
               textDirection: TextDirection.rtl,
@@ -49,13 +50,6 @@ Widget textFild({
               style: headline2,
             ),
           ),
-          if(image.isNotEmpty)
-          SvgPicture.asset(
-            'assets/icon/$image',
-            height: 20.0,
-            color: Colors.black,
-          )
-
           
         ],
       ),

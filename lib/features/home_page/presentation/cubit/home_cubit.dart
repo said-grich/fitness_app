@@ -12,7 +12,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(status: HomeStatus.succes, selectedIndex: index));
   }
 
-  printss() {
-    print("tettette");
+  setindex(int value) {
+    emit(state.copyWith(selectedIndex: value));
   }
 }

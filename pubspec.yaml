@@ -30,6 +30,7 @@ dependencies:
   permission_handler: ^10.1.0
   avatar_view: ^1.0.1
   loading_overlay: ^0.3.0
+  comment_box: ^0.0.17
 
 dev_dependencies:
   flutter_test:

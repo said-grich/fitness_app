@@ -129,8 +129,8 @@ class StepperCubit extends Cubit<StepperState> {
   }
 
   Future<void> saveUserTodb(String sex, String role) async {
-    User? auth = await FirebaseAuth.instance.currentUser;
-    FirebaseFirestore _fireStore = await FirebaseFirestore.instance;
+    User? auth =  FirebaseAuth.instance.currentUser;
+    FirebaseFirestore _fireStore =  FirebaseFirestore.instance;
     if (state.fullname.isEmpty) {
       emit(state.copyWith(
           status: StepperStatus.error, errorMsgName: AppString.isEmpty));

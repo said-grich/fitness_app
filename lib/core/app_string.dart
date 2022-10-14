@@ -49,4 +49,12 @@ class AppString {
   static const String profileString = "الملف الشخصي";
   static const String plansString = "خططي";
   static const String errorString = "خطأ";
+  static const String disscutionString = "المنتدى الرياضي";
+  static const String adddisscutionString = "اضافة مشاركة";
+  static const String titleString = "العنوان :";
+  static const String descriptionString = "الوصف :";
+  static const String submiteString = "تأكيد";
+  static const String titleEmpty = "المرجو اضافة عنوان اولا";
+  static const String commentString = "تعليق ...";
+  static const String addComment = "اضافة تعليق";
 }
