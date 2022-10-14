@@ -5,20 +5,30 @@ import 'package:fitness_app/core/colors.dart';
 import 'package:fitness_app/core/test_style.dart';
 import 'package:fitness_app/features/authentication/bloc/authentication_bloc.dart';
 import 'package:fitness_app/features/authentication/presentation/pages/login_page.dart';
+import 'package:fitness_app/features/dashboard/presentation/pages/dashboard_page.dart';
+import 'package:fitness_app/features/discussion/presentation/pages/discussion_page.dart';
 import 'package:fitness_app/features/home_page/presentation/cubit/home_cubit.dart';
+import 'package:fitness_app/features/plans/presentation/pages/plans_page.dart';
+import 'package:fitness_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:fitness_app/features/stepper_form/pages/stepper_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
+
+
+static const List<Widget> pages = <Widget>[
+  DashboardPage(),
+  PlansPage(),
+  DiscussionPage(),
+  ProfilePage(),
+  // Camera page
+  // Chats page
+];
+
   const HomePage({super.key});
   static Page page() => const MaterialPage<void>(child: HomePage());
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthenticationBloc, AuthenticationState>(
@@ -44,84 +54,87 @@ class _HomePageState extends State<HomePage> {
         }
       },
       builder: (context, state) {
-          int selectedIndex = 0;
+        int selectedIndex = 0;
 
-        return Scaffold(
-          backgroundColor: grayback,
-          appBar: AppBar(
-                backgroundColor: Colors.transparent,
-            elevation: 0,
-            centerTitle: true, 
-            
-            title:  Text(AppString.appTitle,style: headline.copyWith(fontStyle:FontStyle.italic ,color: Colors.black,fontSize: 40),),
-            actions: <Widget>[
-              IconButton(
-                key: const Key('homePage_logout_iconButton'),
-                icon: const Icon(Icons.exit_to_app,color:Colors.black),
-                onPressed: () {
-                  context
-                      .read<AuthenticationBloc>()
-                      .add(AppUserLogoutRequested());
-                },
-              )
-            ], systemOverlayStyle: SystemUiOverlayStyle.dark.copyWith(statusBarColor: grayback),
-          ),
-          bottomNavigationBar:  NavigationBarTheme(
-        data: NavigationBarThemeData(
-          indicatorColor:blueButton ,
-          labelTextStyle: MaterialStateProperty.all(
-            const TextStyle(fontSize: 14.0),
-          ),
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(30),
-            topLeft: Radius.circular(30),
-          ),
-          child: NavigationBar(
-            elevation: 10,
-                labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-                height: 70,
-                backgroundColor: Colors.white,
-                
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (index) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                },
-                destinations: const [
-                  NavigationDestination(
-                    icon: Icon(Icons.home_outlined),
-                    label: 'Home',
-                    
-                    selectedIcon: Icon(
-                      Icons.home_filled,
-                    ),
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.email_outlined),
-                    label: 'Email',
-                    selectedIcon: Icon(Icons.email),
-                  ),
-                  NavigationDestination(
-                    icon: Icon(Icons.favorite_outline),
-                    label: 'Favorites',
-                    selectedIcon: Icon(
-                      Icons.favorite,
-                    ),
-                  ),
-                  NavigationDestination(
-                      icon: Icon(
-                        Icons.settings_outlined,
+        return BlocProvider(
+          create: (context) => HomeCubit(),
+          child: BlocBuilder<HomeCubit, HomeState>(
+            builder: (context, state) {
+              return Scaffold(
+                backgroundColor: grayback,
+                bottomNavigationBar: NavigationBarTheme(
+                    data: NavigationBarThemeData(
+                      indicatorColor: blueButton,
+                      labelTextStyle: MaterialStateProperty.all(
+                        const TextStyle(fontSize: 14.0),
                       ),
-                      selectedIcon: Icon(Icons.settings),
-                      label: 'Settings'),
-                ]),
-          )),
-          body: BlocProvider(
-            create: (context) => HomeCubit(),
-            child: const HomeBody(),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(35),
+                          topRight: Radius.circular(35),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(
+                                0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topRight: Radius.circular(35),
+                          topLeft: Radius.circular(35),
+                        ),
+                        child: NavigationBar(
+                            elevation: 100,
+                            labelBehavior:
+                                NavigationDestinationLabelBehavior.alwaysHide,
+                            height: 70,
+                            backgroundColor: Colors.white,
+                            selectedIndex: state.selectedIndex,
+                            onDestinationSelected: (index) {
+                              context
+                                  .read<HomeCubit>()
+                                  .onDestinationSelected(index);
+                            },
+                            destinations: const [
+                              NavigationDestination(
+                                icon: Icon(Icons.home_outlined),
+                                label: 'Home',
+                                selectedIcon: Icon(
+                                  Icons.home_filled,
+                                ),
+                              ),
+                              NavigationDestination(
+                                icon: Icon(Icons.date_range_outlined),
+                                label: AppString.plansString,
+                                selectedIcon: Icon(Icons.date_range_sharp),
+                              ),
+                              NavigationDestination(
+                                icon: Icon(Icons.email_outlined),
+                                label: 'Favorites',
+                                selectedIcon: Icon(
+                                  Icons.email,
+                                ),
+                              ),
+                              NavigationDestination(
+                                  icon: Icon(
+                                    Icons.person_outline,
+                                  ),
+                                  selectedIcon: Icon(Icons.person),
+                                  label: AppString.profileString),
+                            ]),
+                      ),
+                    )),
+                body: pages.elementAt(state.selectedIndex)
+              );
+            },
           ),
         );
       },

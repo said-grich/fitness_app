@@ -4,7 +4,7 @@ const Color blueButton = Color(0xFF5468FF);
 const Color bluelight = Color(0xFFC1EFFF);
 
 const Color blueText = Color(0xFF4D60E7);
-const Color grayback = Color(0xFFF8F8F8);
+const Color grayback = Color(0xFFF8F8F9);
 
 const Color grayText = Color(0xFF5D5F65);
 const Color whiteText = Color(0xFFEDEEEF);

@@ -233,6 +233,7 @@ class _StepperDemoState extends State<StepperPage> {
                                       borderColor: whiteText,
                                       avatarType: AvatarType.CIRCLE,
                                       backgroundColor: Colors.transparent,
+                                      
                                       imagePath: state.photoUrl.isNotEmpty
                                           ? state.photoUrl
                                           : "assets/image/profile.png",

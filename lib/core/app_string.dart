@@ -43,6 +43,10 @@ class AppString {
       "تم توفير كلمة مرور خاطئة لهذا المستخدم.";
   static const String noUserFoundError =
       "لم يتم العثور على مستخدم لهذا البريد الإلكتروني.";
-      
 
+  //pages :
+
+  static const String profileString = "الملف الشخصي";
+  static const String plansString = "خططي";
+  static const String errorString = "خطأ";
 }

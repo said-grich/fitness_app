@@ -35,6 +35,7 @@ Widget textFild({
           Container(
             width: 240.0,
             child: TextField(
+              
               onChanged: onChange,
               textAlignVertical: TextAlignVertical.center,
               textDirection: TextDirection.rtl,
