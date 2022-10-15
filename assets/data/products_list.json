@@ -1,0 +1,58 @@
+{
+
+"PROTEIN":[
+    {
+        "name":"بروتين مصل اللبن",
+        "desc":"بروتين مصل اللبن هو أحد البروتينات الأساسية الموجودة في منتجات الألبان. نتيجة ثانوية لعملية صنع الجبن ، يوفر بروتين مصل اللبن كميات كبيرة من الأحماض الأمينية الأساسية اللازمة لأداء الوظائف التي تؤديها البروتينات في الجسم.",
+        "price":"11.64",
+        "photoUrl":"https://media.24protein.com/media/catalog/product/cache/b086b137f52447e15b5d98a5006d223f/l/i/live3_260x_2x_1.jpg"
+    }, {
+        "name":"بروتين الشرش المعزول",
+        "desc":"الواي إيزوليت من شركة Scitec Nutrition، هي من بين أهم مكملات الواي بروتين في السوق، تمتاز بخصائصها الغذائية العالية، مصممة خصيصا للرياضيين الذين يبحثون عن بناء عضلي فعال.",
+        "price":"12",
+        "photoUrl":"https://media.24protein.com/media/catalog/product/cache/b086b137f52447e15b5d98a5006d223f/2/d/2da54a74.jpg"
+    }, {
+        "name":"جولد ستاندرد 100% واي",
+        "desc":"الجولد ستاندرد Gold Standard 100% هو عبارة واي بروتين مستخلص من حليب البقر، الجولد ستاندار هو الواي الأكثر مبيعا في العالم. يمنحكم الجولد 24 غرام من البروتين الخالص ليساعدكم في بناء و زيادة الكتلة العضلية بكفائة عالية",
+        "price":"30",
+        "photoUrl":"https://www.nutrilionz.ma/media/catalog/product/cache/2/thumbnail/600x681/9df78eab33525d08d6e5fb8d27136e95/g/o/gold-standard-100-whey-protein-optimum-nutrition.jpeg"
+    }, {
+        "name":"ماموث ماس جينر 2.27 كيلو",
+        "desc":"تم تطوير الماموث خصيصًا لجميع الأشخاص الذين يجدون صعوبة في اكتساب الكتلة. لذلك فليس من دون سبب أن ماموث حصل على جائزة أفضل رابح في كندا للعام الثالث + قرائة المزيد",
+        "price":"35",
+        "photoUrl":"https://www.nutrilionz.ma/media/catalog/product/cache/2/thumbnail/600x681/9df78eab33525d08d6e5fb8d27136e95/m/a/mammoth-mass-interactive-nutrition.png"
+    }
+],
+
+"BARS":[
+
+    {
+        "name":"جامبو بار (15 × 100 جرام)",
+        "desc":"تعتبر ألواح جامبو الجديدة من سايتك مثالية كوجبة خفيفة أو بعد التدريب لاكتساب أقصى كتلة عضلية. + قرائة المزيد",
+        "price":"35",
+        "photoUrl":"https://www.nutrilionz.ma/media/catalog/product/cache/2/thumbnail/600x681/9df78eab33525d08d6e5fb8d27136e95/j/u/jumbo-bar-x15-scitec-nutrition_1.jpg"
+    },
+    {
+        "name":"ماموث ماس جينر 2.27 كيلو",
+        "desc":"تم تطوير الماموث خصيصًا لجميع الأشخاص الذين يجدون صعوبة في اكتساب الكتلة. لذلك فليس من دون سبب أن ماموث حصل على جائزة أفضل رابح في كندا للعام الثالث + قرائة المزيد",
+        "price":"35",
+        "photoUrl":"https://www.nutrilionz.ma/media/catalog/product/cache/2/thumbnail/600x681/9df78eab33525d08d6e5fb8d27136e95/m/a/mammoth-mass-interactive-nutrition.png"
+    },
+    {
+        "name":"ماموث ماس جينر 2.27 كيلو",
+        "desc":"تم تطوير الماموث خصيصًا لجميع الأشخاص الذين يجدون صعوبة في اكتساب الكتلة. لذلك فليس من دون سبب أن ماموث حصل على جائزة أفضل رابح في كندا للعام الثالث + قرائة المزيد",
+        "price":"35",
+        "photoUrl":"https://www.nutrilionz.ma/media/catalog/product/cache/2/thumbnail/600x681/9df78eab33525d08d6e5fb8d27136e95/m/a/mammoth-mass-interactive-nutrition.png"
+    }
+
+
+]
+
+
+}
+
+
+
+
+
+

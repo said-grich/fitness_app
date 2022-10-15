@@ -1,8 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_app/core/app_string.dart';
 import 'package:fitness_app/core/bloc_export.dart';
 import 'package:fitness_app/core/colors.dart';
-import 'package:fitness_app/core/test_style.dart';
 import 'package:fitness_app/features/authentication/bloc/authentication_bloc.dart';
 import 'package:fitness_app/features/authentication/presentation/pages/login_page.dart';
 import 'package:fitness_app/features/dashboard/presentation/pages/dashboard_page.dart';
@@ -12,7 +10,6 @@ import 'package:fitness_app/features/plans/presentation/pages/plans_page.dart';
 import 'package:fitness_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:fitness_app/features/stepper_form/pages/stepper_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class HomePage extends StatelessWidget {
   final int pgaenumber;
@@ -21,8 +18,6 @@ class HomePage extends StatelessWidget {
     PlansPage(),
     DiscussionPage(),
     ProfilePage(),
-    // Camera page
-    // Chats page
   ];
 
   const HomePage({super.key, required this.pgaenumber});
@@ -54,7 +49,6 @@ class HomePage extends StatelessWidget {
       },
       builder: (context, state) {
         int selectedIndex = 0;
-
         return BlocProvider(
           create: (context) => HomeCubit()..setindex(pgaenumber),
           child: BlocBuilder<HomeCubit, HomeState>(

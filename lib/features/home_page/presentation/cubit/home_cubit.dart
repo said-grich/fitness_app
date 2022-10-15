@@ -1,11 +1,12 @@
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/bloc_export.dart';
+import 'package:fitness_app/features/discussion/model/discussion_model.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeState.initialState());
-
+  
   onDestinationSelected(index) {
     emit(state.copyWith(status: HomeStatus.submiting));
 

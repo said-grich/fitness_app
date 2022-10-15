@@ -31,6 +31,9 @@ dependencies:
   avatar_view: ^1.0.1
   loading_overlay: ^0.3.0
   comment_box: ^0.0.17
+  carousel_slider: ^4.1.1
+  shimmer: ^2.0.0
+  cached_network_image: ^3.2.2
 
 dev_dependencies:
   flutter_test:

@@ -57,4 +57,5 @@ class AppString {
   static const String titleEmpty = "المرجو اضافة عنوان اولا";
   static const String commentString = "تعليق ...";
   static const String addComment = "اضافة تعليق";
+  static const String productsString = "المنتوجات";
 }
