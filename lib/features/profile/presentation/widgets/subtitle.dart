@@ -1,4 +1,4 @@
-  import 'package:fitness_app/core/test_style.dart';
+import 'package:fitness_app/core/test_style.dart';
 import 'package:flutter/material.dart';
 
 Directionality subTitle(String title) {

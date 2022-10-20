@@ -1,5 +1,8 @@
 import 'package:fitness_app/core/app_string.dart';
+import 'package:fitness_app/core/space.dart';
 import 'package:fitness_app/features/dashboard/presentation/cubit/dashboard_cubit.dart';
+import 'package:fitness_app/features/dashboard/presentation/widgets/product_cousale_data_found.dart';
+import 'package:fitness_app/features/profile/presentation/widgets/subtitle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -27,7 +30,7 @@ class DashboardPage extends StatelessWidget {
     
            leading: Builder(
               builder: (context) => IconButton(
-                  icon: Icon(Icons.menu , color: Colors.black),
+                  icon: const Icon(Icons.menu , color: Colors.black),
                   onPressed: () {
                   Scaffold.of(context).openDrawer();
                   },
@@ -65,16 +68,45 @@ class DashboardPage extends StatelessWidget {
                if(state.status==DashboardStatus.submiting)
                   // ignore: curly_braces_in_flow_control_structures
                   if(state.discussionList.isNotEmpty) {
-                    return CarouselSliderDataFound(state.discussionList);
+                    return Column(
+                      children: [
+                        CarouselSliderDataFound(state.discussionList),
+                                               const SpaceVH(height: 10,),
+
+                        title("${AppString.productsIntrString} :"),
+                        const SpaceVH(height: 5,),
+                        ProductCarouselSliderDataFound(),
+
+
+
+                      ],
+                    );
                   } else {
-                    return const CarouselLoading();
+                    return Column(
+                      children: [
+                         const CarouselLoading(),
+                         title("${AppString.productsIntrString} :"),
+                        ProductCarouselSliderDataFound(),
+                      ],
+                    );
                   }
                 else
                   if(state.discussionList.isNotEmpty) {
-                    return CarouselSliderDataFound(state.discussionList);
+                    return Column(
+                      children: [
+                        CarouselSliderDataFound(state.discussionList),
+                         title("${AppString.productsIntrString} :"),
+                        ProductCarouselSliderDataFound(),
+                        
+                      ],
+                    );
                   } else {
                     return Container();
                   }
+
+
+
+
               },
           )),
         ),
@@ -82,3 +114,26 @@ class DashboardPage extends StatelessWidget {
     );
   }
 }
+
+
+
+Directionality title(String title) {
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Container(
+        margin: const EdgeInsets.symmetric(
+          horizontal: 20.0,
+          vertical: 5.0,
+        ),
+        child: Row(
+          children: [
+            Text(
+              title,
+              style: headline3.copyWith(color: Colors.black ,fontSize: 18),
+              textAlign: TextAlign.right,
+            ),
+          ],
+        ),
+      ),
+    );
+  }

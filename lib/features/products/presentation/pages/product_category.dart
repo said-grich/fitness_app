@@ -1,127 +1,67 @@
+import 'dart:convert';
+
+import 'package:fitness_app/core/bloc_export.dart';
+import 'package:fitness_app/features/products/presentation/pages/prducts_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../../../../core/app_string.dart';
+import '../../../../core/colors.dart';
+import '../../../../core/test_style.dart';
+import '../../../plans/presentation/widgets/list_card.dart';
+import '../cubit/products_cubit.dart';
+import '../widgets/category_widget.dart';
+
+import '../../model/category_model.dart';
 
 class Category extends StatelessWidget {
-  const Category({super.key});
+  Category({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFFFCFAF8),
-      body: ListView(
-        children: <Widget>[
-          const SizedBox(height: 15.0),
-          Container(
-              padding: const EdgeInsets.only(right: 15.0),
-              width: MediaQuery.of(context).size.width - 30.0,
-              height: MediaQuery.of(context).size.height - 50.0,
-              child: GridView.count(
-                crossAxisCount: 2,
-                primary: false,
-                crossAxisSpacing: 10.0,
-                mainAxisSpacing: 15.0,
-                childAspectRatio: 0.8,
-                children: <Widget>[
-                  _buildCard('Cookie mint', '\$3.99', 'assets/cookiemint.jpg',
-                      false, false, context),
-                  _buildCard('Cookie cream', '\$5.99', 'assets/cookiecream.jpg',
-                      true, false, context),
-                  _buildCard('Cookie classic', '\$1.99',
-                      'assets/cookieclassic.jpg', false, true, context),
-                  _buildCard('Cookie choco', '\$2.99', 'assets/cookiechoco.jpg',
-                      false, false, context)
-                ],
-              )),
-          const SizedBox(height: 15.0)
-        ],
+    return BlocProvider(
+      create: (context) => ProductsCubit()..loadCategory(),
+      child: Scaffold(
+        appBar: AppBar(
+          systemOverlayStyle:
+              SystemUiOverlayStyle.light.copyWith(statusBarColor: blueButton),
+          title: Text(
+            AppString.productsString,
+            style: headline.copyWith(fontSize: 20, color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: blueButton,
+        ),
+        backgroundColor: const Color(0xFFFCFAF8),
+        body: ListView(
+          children: <Widget>[
+            const SizedBox(height: 15.0),
+            BlocBuilder<ProductsCubit, ProductsState>(
+              builder: (context, state) {
+
+                var items = [
+    ProductInfo('مكملات غدائية', const Color(0xff6DC8F3),
+        const Color(0xff73A1F9), 4.4, '', '', 'protien_poider.png', state.productListPROTEIN),
+    ProductInfo('مأكولات خفيفة لرياضين', const Color(0xffFFB157),
+        const Color(0xffFFA057), 3.7, '', '', 'protien_bar.png', state.productListBARS),
+    ProductInfo('معدات رياضية ', const Color.fromARGB(255, 255, 87, 199),
+        const Color.fromARGB(255, 202, 87, 255), 3.7, '', '', 'tools.png', state.productListTools),
+  ];
+                return SizedBox(
+                    width: MediaQuery.of(context).size.width - 30.0,
+                    height: MediaQuery.of(context).size.height - 50.0,
+                    child: CategoryCardList(
+                      items: items,
+                      borderRadius: 24,
+                    ));
+              },
+            ),
+            const SizedBox(height: 15.0)
+          ],
+        ),
       ),
     );
-}
-
-
-
-
-
-
-
-Widget _buildCard(String name, String price, String imgPath, bool added,
-      bool isFavorite, context) {
-    return Padding(
-        padding: const EdgeInsets.only(top: 5.0, bottom: 5.0, left: 5.0, right: 5.0),
-        child: InkWell(
-            onTap: () {
-             
-            },
-            child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 3.0,
-                          blurRadius: 5.0)
-                    ],
-                    color: Colors.white),
-                child: Column(children: [
-                  Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            isFavorite
-                                ? const Icon(Icons.favorite, color: Color(0xFFEF7532))
-                                : const Icon(Icons.favorite_border,
-                                    color: Color(0xFFEF7532))
-                          ])),
-                  Hero(
-                      tag: imgPath,
-                      child: Container(
-                          height: 75.0,
-                          width: 75.0,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage(imgPath),
-                                  fit: BoxFit.contain)))),
-                  const SizedBox(height: 7.0),
-                  Text(price,
-                      style: const TextStyle(
-                          color: Color(0xFFCC8053),
-                          fontFamily: 'Varela',
-                          fontSize: 14.0)),
-                  Text(name,
-                      style: const TextStyle(
-                          color: Color(0xFF575E67),
-                          fontFamily: 'Varela',
-                          fontSize: 14.0)),
-                  Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(color: const Color(0xFFEBEBEB), height: 1.0)),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 5.0, right: 5.0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            if (!added) ...[
-                              const Icon(Icons.shopping_basket,
-                                  color: Color(0xFFD17E50), size: 12.0),
-                              const Text('Add to cart',
-                                  style: TextStyle(
-                                      fontFamily: 'Varela',
-                                      color: Color(0xFFD17E50),
-                                      fontSize: 12.0))
-                            ],
-                            if (added) ...[
-                              const Icon(Icons.remove_circle_outline,
-                                  color: Color(0xFFD17E50), size: 12.0),
-                              const Text('3',
-                                  style: TextStyle(
-                                      fontFamily: 'Varela',
-                                      color: Color(0xFFD17E50),
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0)),
-                              const Icon(Icons.add_circle_outline,
-                                  color: Color(0xFFD17E50), size: 12.0),
-                            ]
-                          ]))
-                ]))));
   }
 }

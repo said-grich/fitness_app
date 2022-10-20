@@ -65,7 +65,7 @@ class CardList extends StatelessWidget {
                         flex: 3,
                       ),
                       Expanded(
-                        flex: 3,
+                        flex: 4,
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,

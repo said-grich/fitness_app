@@ -15,8 +15,8 @@ class ProductsCubit extends Cubit<ProductsState> {
         await rootBundle.loadString('assets/data/products_list.json');
     final data = await json.decode(dataString);
     List tmp1 = data["BARS"];
-    List tmp2 = data["BARS"];
-    List tmp3 = data["BARS"];
+    List tmp2 = data["PROTEIN"];
+    List tmp3 = data["TOOLS"];
     final List<Product> listOfproductProtien = [];
     final List<Product> listOfproductBars = [];
     final List<Product> listOfproductTools = [];

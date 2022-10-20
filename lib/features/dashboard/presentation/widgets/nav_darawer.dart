@@ -23,7 +23,7 @@ class NavDrawer extends StatelessWidget {
               title:  const Text(AppString.productsString),
               onTap: () => {
                  Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Category()))
+                  MaterialPageRoute(builder: (context) =>  Category()))
               },
             ),
             ListTile(
