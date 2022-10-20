@@ -45,7 +45,6 @@ class AppString {
       "لم يتم العثور على مستخدم لهذا البريد الإلكتروني.";
 
   //pages :
-
   static const String profileString = "الملف الشخصي";
   static const String plansString = "خططي";
   static const String errorString = "خطأ";
@@ -57,8 +56,11 @@ class AppString {
   static const String titleEmpty = "المرجو اضافة عنوان اولا";
   static const String commentString = "تعليق ...";
   static const String addComment = "اضافة تعليق";
-  static const String productsString = "منتوجات";
-  static const String productsIntrString = "منتوجات قد تهمك";
+  static const String productsString = "المنتجات";
+  static const String productsIntrString = "منتجات قد تهمك";
   static const String addtoCheckoutString = "اضف الى السلة ";
+  static const String checkOutString = "سلة المشتريات";
+
+
 
 }

@@ -17,9 +17,8 @@ class NavDrawer extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.only(top: 50),
           children: <Widget>[
-       
             ListTile(
-              leading: const Icon(Icons.production_quantity_limits),
+              leading: const Icon(Icons.shopping_bag),
               title:  const Text(AppString.productsString),
               onTap: () => {
                  Navigator.of(context).push(

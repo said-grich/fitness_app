@@ -4,18 +4,22 @@ part of 'products_cubit.dart';
 enum ProductsStatus { initial, submiting, succes, error }
 
 class ProductsState extends Equatable {
-  const ProductsState({required this.status, required this.productListBARS ,required this.productListPROTEIN, required  this.productListTools });
+  const ProductsState({required this.checkoutList, required this.status, required this.productListBARS ,required this.productListPROTEIN, required  this.productListTools });
   final ProductsStatus status;
   final List<Product> productListBARS;
   final List<Product> productListPROTEIN;
   final List<Product> productListTools;
+  final List<Product> checkoutList;
+
 
   factory ProductsState.initial() {
-    return const ProductsState(status: ProductsStatus.initial, productListBARS: [],productListPROTEIN: [] , productListTools:  []);
+    return const ProductsState(status: ProductsStatus.initial, productListBARS: [],productListPROTEIN: [] , productListTools:  [], checkoutList: []);
   }
 
   @override
-  List<Object> get props => [status, productListBARS,productListPROTEIN];
+  List<Object> get props => [status, productListBARS,productListPROTEIN,productListTools,checkoutList];
+
+
 
 
 
@@ -24,12 +28,14 @@ class ProductsState extends Equatable {
     List<Product>? productListBARS,
     List<Product>? productListPROTEIN,
     List<Product>? productListTools,
+    List<Product>? checkoutList,
   }) {
     return ProductsState(
       status: status ?? this.status,
       productListBARS: productListBARS ?? this.productListBARS,
       productListPROTEIN: productListPROTEIN ?? this.productListPROTEIN,
       productListTools: productListTools ?? this.productListTools,
+      checkoutList: checkoutList ?? this.checkoutList,
     );
   }
 }

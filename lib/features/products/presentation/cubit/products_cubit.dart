@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/bloc_export.dart';
+import 'package:fitness_app/features/products/model/chckout_model.dart';
 import 'package:fitness_app/features/products/model/product.dart';
 import 'package:flutter/services.dart';
 
@@ -37,4 +38,12 @@ class ProductsCubit extends Cubit<ProductsState> {
         productListTools: listOfproductTools,
         status: ProductsStatus.succes));
   }
+
+  addTocheckOut(Product product) {
+    emit(state.copyWith(
+        checkoutList: List.from(state.checkoutList)..add(product)));
+
+  }
+
+  
 }

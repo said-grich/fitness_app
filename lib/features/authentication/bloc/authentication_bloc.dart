@@ -10,7 +10,7 @@ part 'authentication_event.dart';
 part 'authentication_state.dart';
 
 class AuthenticationBloc
-    extends Bloc<AuthenticationEvent, AuthenticationState> {
+    extends HydratedBloc<AuthenticationEvent, AuthenticationState> {
   final AuthenticationRepository _repository;
   late final StreamSubscription<UserModel> _userSubscription;
 
@@ -72,5 +72,19 @@ class AuthenticationBloc
     add(AppUserLogoutWithoutCompletInfo());
     _userSubscription.cancel();
     return super.close();
+  }
+  
+  @override
+  AuthenticationState? fromJson(Map<String, dynamic> json) {
+
+
+    
+  }
+  
+  @override
+  Map<String, dynamic>? toJson(AuthenticationState state) {
+
+    
+  
   }
 }

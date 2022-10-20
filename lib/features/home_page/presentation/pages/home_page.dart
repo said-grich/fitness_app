@@ -13,12 +13,7 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   final int pgaenumber;
-  static const List<Widget> pages = <Widget>[
-    DashboardPage(),
-    PlansPage(),
-    DiscussionPage(),
-    ProfilePage(),
-  ];
+ 
 
   const HomePage({super.key, required this.pgaenumber});
   static Page page() => const MaterialPage<void>(child: HomePage(pgaenumber: 0,));
@@ -53,6 +48,12 @@ class HomePage extends StatelessWidget {
           create: (context) => HomeCubit()..setindex(pgaenumber),
           child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
+                 List<Widget> pages = <Widget>[
+    const DashboardPage(),
+    PlansPage(model: state.profile,),
+    const DiscussionPage(),
+    const ProfilePage(),
+  ];
               return Scaffold(
                   backgroundColor: grayback,
                   bottomNavigationBar: NavigationBarTheme(
