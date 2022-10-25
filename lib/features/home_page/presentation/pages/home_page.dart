@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
           child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
                  List<Widget> pages = <Widget>[
-    const DashboardPage(),
+     DashboardPage(model: state.profile,),
     PlansPage(model: state.profile,),
     const DiscussionPage(),
     const ProfilePage(),
