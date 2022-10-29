@@ -19,7 +19,6 @@ import '../widgets/color_filter.dart';
 
 class DiscussionPage extends StatelessWidget {
   const DiscussionPage({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -41,20 +40,23 @@ class DiscussionPage extends StatelessWidget {
             body: ListView.builder(
                 itemCount: state.disscutionList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return buildImageCard(state.disscutionList[index],state.disscutionList[index].title,state.disscutionList[index].photourl,context);
+                  return buildImageCard(
+                      state.disscutionList[index],
+                      state.disscutionList[index].title,
+                      state.disscutionList[index].photourl,
+                      context);
                 }),
             floatingActionButton: FloatingActionButton(
               elevation: 50,
               hoverColor: Colors.red,
               autofocus: true,
               onPressed: () {
-                
-
-Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const AddDiscustion()),
-            (Route<dynamic> route) => false,
-          );
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddDiscustion()),
+                  (Route<dynamic> route) => false,
+                );
               },
               tooltip: AppString.adddisscutionString,
               child: const Icon(Icons.add),
@@ -65,7 +67,9 @@ Navigator.pushAndRemoveUntil(
     );
   }
 
-  Widget buildImageCard(DiscussionModel discussionModel, String title, String imagePath ,context) => Card(
+  Widget buildImageCard(DiscussionModel discussionModel, String title,
+          String imagePath, context) =>
+      Card(
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
@@ -79,10 +83,12 @@ Navigator.pushAndRemoveUntil(
               // ignore: sort_child_properties_last
               child: InkWell(
                 onTap: () {
-                     Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DetailsPage(model: discussionModel)),
-          );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            DetailsPage(model: discussionModel)),
+                  );
                 },
               ),
               height: 240,
@@ -108,28 +114,25 @@ class AddDiscustion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
-              systemOverlayStyle: SystemUiOverlayStyle.light
-                  .copyWith(statusBarColor: blueButton),
-              title: Text(
-                AppString.adddisscutionString,
-                style: headline.copyWith(fontSize: 20, color: Colors.white),
-              ),
-              centerTitle: true,
-              backgroundColor: blueButton,
-            ),
-
+        systemOverlayStyle:
+            SystemUiOverlayStyle.light.copyWith(statusBarColor: blueButton),
+        title: Text(
+          AppString.adddisscutionString,
+          style: headline.copyWith(fontSize: 20, color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: blueButton,
+      ),
       body: SingleChildScrollView(
-                        child: Padding(
-                          padding: MediaQuery.of(context).viewInsets,
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[FormDisscution()],
-                          ),
-                        ),
-                      ),
-
+        child: Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[FormDisscution()],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -138,6 +141,8 @@ class FormDisscution extends StatelessWidget {
   FormDisscution({super.key});
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -164,6 +169,7 @@ class FormDisscution extends StatelessWidget {
                         onChange: (String value) {
                           context.read<DiscussionCubit>().titleChanged(value);
                         }),
+                   
                     textFormFild(
                         hintTxt: AppString.descriptionString,
                         image: '',
@@ -223,13 +229,14 @@ class FormDisscution extends StatelessWidget {
                         onTap: () {
                           context.read<DiscussionCubit>().submit();
 
-                          
                           if (state.status == DiscussionStatus.succes) {
                             Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => const HomePage(pgaenumber: 2)),
-            (Route<dynamic> route) => false,
-          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HomePage(pgaenumber: 2)),
+                              (Route<dynamic> route) => false,
+                            );
                           }
                         },
                         text: AppString.submiteString,

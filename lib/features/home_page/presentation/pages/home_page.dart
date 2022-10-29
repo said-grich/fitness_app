@@ -49,8 +49,9 @@ class HomePage extends StatelessWidget {
           child: BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
                  List<Widget> pages = <Widget>[
-     DashboardPage(model: state.profile,),
-    PlansPage(model: state.profile,),
+                  DashboardPage(model: state.profile, type: state.type),
+
+                  PlansPage(model: state.profile, type: state.type,),
     const DiscussionPage(),
     const ProfilePage(),
   ];

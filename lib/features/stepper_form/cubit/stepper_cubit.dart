@@ -149,7 +149,7 @@ class StepperCubit extends Cubit<StepperState> {
     }
     if (state.status == StepperStatus.succes) {
       emit(state.copyWith(status: StepperStatus.submitting));
-      var userDocRef = _fireStore.collection('collection_name').doc(auth?.uid);
+      var userDocRef = _fireStore.collection('users').doc(auth?.uid);
       var doc = await userDocRef.get();
 
       if (doc.exists) {

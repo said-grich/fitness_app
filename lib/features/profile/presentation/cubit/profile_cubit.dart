@@ -30,11 +30,8 @@ class ProfileCubit extends Cubit<ProfileState> {
             status: ProfileStatus.succes, profileModel: profileModel));
       } else {
         emit(state.copyWith(
-          status: ProfileStatus.error,
-          profileModel: ProfileModel.empty
-        ));
+            status: ProfileStatus.error, profileModel: ProfileModel.empty));
       }
     }
-
   }
 }

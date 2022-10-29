@@ -8,6 +8,9 @@ import 'package:fitness_app/features/home_page/presentation/pages/home_page.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'features/home_page/presentation/cubit/home_cubit.dart';
+import 'features/plans/presentation/cubit/plans_cubit.dart';
+import 'features/products/presentation/cubit/products_cubit.dart';
 import 'features/stepper_form/pages/stepper_page.dart';
 
 class FitnessApp extends StatelessWidget {
@@ -26,10 +29,21 @@ class FitnessApp extends StatelessWidget {
         ],
         child: MultiBlocProvider(
           providers: [
+
+
             BlocProvider(
               create: (_) => AuthenticationBloc(
                   authenticationRepository: _authenticationRepository),
+            ),    BlocProvider(
+              create: (_) => ProductsCubit(
             ),
+            ) ,BlocProvider(
+              create: (_) => HomeCubit(
+            ),
+            ),BlocProvider(
+              create: (_) => PlansCubit(
+            ),
+            )
           ],
           child: BlocProvider(
             create: (context) => AuthenticationBloc(

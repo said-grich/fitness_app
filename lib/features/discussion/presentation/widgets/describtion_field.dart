@@ -1,7 +1,6 @@
 import 'package:fitness_app/core/colors.dart';
 import 'package:fitness_app/core/test_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 
 
@@ -35,8 +34,7 @@ Widget textFormFild({
           Container(
             width: 240.0,
             child: TextFormField(
-              minLines: 5,
-              maxLines: 6,
+              
               onChanged: onChange,
               textAlignVertical: TextAlignVertical.center,
               textDirection: TextDirection.rtl,

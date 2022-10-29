@@ -8,17 +8,21 @@ import 'package:fitness_app/features/profile/model/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
+import '../pages/trainers_list.dart';
+
 class CardPlansList extends StatelessWidget {
   const CardPlansList({
     Key? key,
     required this.items,
-    required double borderRadius, required this.model,
+    required double borderRadius,
+    required this.model, required this.loginUserType,
   })  : _borderRadius = borderRadius,
         super(key: key);
 
   final List<PlanInfo> items;
   final double _borderRadius;
   final ProfileModel model;
+  final int loginUserType;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +33,24 @@ class CardPlansList extends StatelessWidget {
           create: (context) => PlansCubit(),
           child: GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
+
+                if(loginUserType==1){
+
+                    Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => TrainerPlansPAge(
+                        title: items[index].name,
                         model: model,
+                        type: items[index].type,
                       )));
+                }else{
+
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>  TrainersList(type: items[index].type,
+                      )));
+
+                }
+
+              
             },
             child: Center(
               child: Padding(
@@ -119,9 +137,10 @@ class PlanInfo {
   final Color startColor;
   final Color endColor;
   final String icon;
+  final int type;
 
   PlanInfo(this.name, this.startColor, this.endColor, this.rating,
-      this.location, this.category, this.icon);
+      this.location, this.category, this.icon, this.type);
 }
 
 class CustomCardShapePainter extends CustomPainter {

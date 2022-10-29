@@ -60,7 +60,13 @@ class AppString {
   static const String productsIntrString = "منتجات قد تهمك";
   static const String addtoCheckoutString = "اضف الى السلة ";
   static const String checkOutString = "سلة المشتريات";
-
-
-
+  static const String createPlan = "انشاء خطة";
+  static const List<String> plansArray = ["مبتدأ", "متوسط", "محترف", "خاص"];
+  static const List<String> subMenuArray = ["الاشتركات"];
+  static const String categoryString = " الصنف";
+  static const String stpesString = " المميزات";
+  static const String confirmeString = " تأكيد";
+  static const String addStepString = " اضافة ميزة :";
+  static const String addSuccesString = " تمت اضافة الخطة بنجاح";
+  static const String getString = " اشتراك";
 }

@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:fitness_app/core/bloc_export.dart';
-import 'package:fitness_app/features/products/model/chckout_model.dart';
 import 'package:fitness_app/features/products/model/product.dart';
 import 'package:flutter/services.dart';
 

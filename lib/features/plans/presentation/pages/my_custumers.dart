@@ -1,29 +1,22 @@
 import 'package:avatar_view/avatar_view.dart';
-import 'package:fitness_app/core/test_style.dart';
-import 'package:fitness_app/features/plans/model/plane_model.dart';
-import 'package:fitness_app/features/plans/presentation/cubit/plans_cubit.dart';
-import 'package:fitness_app/features/plans/presentation/pages/create_plan.dart';
-import 'package:fitness_app/features/plans/presentation/pages/plan_details.dart';
+import 'package:fitness_app/features/plans/presentation/pages/trainer_page.dart';
 import 'package:fitness_app/features/profile/model/profile_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../../../../core/app_string.dart';
 import '../../../../core/bloc_export.dart';
 import '../../../../core/colors.dart';
+import '../../../../core/test_style.dart';
+import '../../../chat/presentation/pages/chat_page.dart';
+import '../cubit/plans_cubit.dart';
 
-class TrainerPlansPAge extends StatelessWidget {
-  const TrainerPlansPAge(
-      {super.key,
-      required this.model,
-      required this.type,
-      required this.title});
-  final ProfileModel model;
+class MyCustomersList extends StatelessWidget {
+  const MyCustomersList({super.key, required this.type});
   final int type;
-  final String title;
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PlansCubit()..loadBytype(model.id),
+      create: (context) => PlansCubit()..loadMyCustumers(),
       child: BlocBuilder<PlansCubit, PlansState>(
         builder: (context, state) {
           return Scaffold(
@@ -31,7 +24,7 @@ class TrainerPlansPAge extends StatelessWidget {
               systemOverlayStyle: SystemUiOverlayStyle.light
                   .copyWith(statusBarColor: blueButton),
               title: Text(
-                title,
+                "قائمتي المتدربين" ,
                 style: headline.copyWith(fontSize: 20, color: Colors.white),
               ),
               centerTitle: true,
@@ -41,40 +34,16 @@ class TrainerPlansPAge extends StatelessWidget {
             body: SingleChildScrollView(
               child: SafeArea(
                 child: Column(
-                  children: type == 1
-                      ? state.plansList1
-                          .map((e) => PlanCard(
-                                imagPath: model.photoUrl,
-                                comment: e.category,
-                                name: e.name, plan: e,
-                                 trainerId: model,
-                              ))
-                          .toList()
-                      : state.plansList2
-                          .map((e) => PlanCard(
-                                imagPath: model.photoUrl,
-                                comment: e.category,
-                                name: e.name, plan: e, trainerId: model,
-                              ))
-                          .toList(),
-                ),
+                    children: state.myCustomersList
+                        .map((e) => CustomersCard(
+                              imagPath: e.photoUrl,
+                              comment: e.email ?? "",
+                              name: e.fullname ?? "",
+                              model: e,
+                              type: type,
+                            ))
+                        .toList()),
               ),
-            ),
-            floatingActionButton: FloatingActionButton(
-              elevation: 50,
-              hoverColor: Colors.red,
-              autofocus: true,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CreatePlan(
-                            type: type,
-                          )),
-                );
-              },
-              tooltip: AppString.adddisscutionString,
-              child: const Icon(Icons.add),
             ),
           );
         },
@@ -83,19 +52,20 @@ class TrainerPlansPAge extends StatelessWidget {
   }
 }
 
-class PlanCard extends StatelessWidget {
-  const PlanCard({
+class CustomersCard extends StatelessWidget {
+  const CustomersCard({
     Key? key,
     required this.imagPath,
     required this.name,
     required this.comment,
-    required this.plan, required this.trainerId,
+    required this.model,
+    required this.type,
   }) : super(key: key);
   final String? imagPath;
   final String name;
   final String comment;
-  final PlanModel plan;
-  final ProfileModel trainerId;
+  final ProfileModel model;
+  final int type;
 
   @override
   Widget build(BuildContext context) {
@@ -105,8 +75,9 @@ class PlanCard extends StatelessWidget {
         textDirection: TextDirection.rtl,
         child: GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => PlanDetails(plan: plan, trainerId: trainerId ,)));
+          
+             Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => ChatPage(name: name,)));
           },
           child: Card(
             // ignore: sort_child_properties_last

@@ -10,6 +10,7 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeState.initialState());
 
+  
   onDestinationSelected(index) {
     emit(state.copyWith(status: HomeStatus.submiting));
 
@@ -38,7 +39,13 @@ class HomeCubit extends Cubit<HomeState> {
       if (json != null) {
         var profileModel = ProfileModel.fromJson(json);
 
-        emit(state.copyWith(status: HomeStatus.succes, profile: profileModel));
+        if(profileModel.role=="trainer" ){
+        emit(state.copyWith(status: HomeStatus.succes, profile: profileModel , type: 1));
+
+        }else{
+        emit(state.copyWith(status: HomeStatus.succes, profile: profileModel , type: 0));
+        }
+
       } else {
         emit(state.copyWith(
             status: HomeStatus.error, profile: ProfileModel.empty));

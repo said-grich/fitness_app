@@ -5,45 +5,31 @@ PlanModel planModelFromJson(String str) => PlanModel.fromJson(json.decode(str));
 String planModelToJson(PlanModel data) => json.encode(data.toJson());
 
 class PlanModel {
-    PlanModel({
-     required   this.name,
-    required    this.dure,
-    required    this.desc,
-     required   this.steps,
-    });
+  PlanModel({
+    required this.name,
+    required this.category,
+    required this.desc,
+    required this.steps,
+  });
 
-    String name;
-    String dure;
-    String desc;
-    List<Step> steps;
+  String name;
+  String category;
+  String desc;
+  List<String> steps;
 
-    factory PlanModel.fromJson(Map<String, dynamic> json) => PlanModel(
+  factory PlanModel.fromJson(Map<String, dynamic> json) => PlanModel(
         name: json["name"],
-        dure: json["dure"],
+        category: json["category"],
         desc: json["desc"],
-        steps: List<Step>.from(json["steps"].map((x) => Step.fromJson(x))),
-    );
+        steps: List<String>.from(json["steps"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "name": name,
-        "dure": dure,
+        "category": category,
         "desc": desc,
-        "steps": List<dynamic>.from(steps.map((x) => x.toJson())),
-    };
+        "steps": List<dynamic>.from(steps),
+      };
 }
 
-class Step {
-    Step({ required
-        this.stepDesc,
-    });
 
-    String stepDesc;
-
-    factory Step.fromJson(Map<String, dynamic> json) => Step(
-        stepDesc: json["stepDesc"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "stepDesc": stepDesc,
-    };
-}
